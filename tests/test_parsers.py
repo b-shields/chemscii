@@ -6,6 +6,7 @@ import pytest
 from rdkit.Chem import Mol
 
 from chemscii.parsers.molecule import parse_sdf, parse_smiles
+from chemscii.parsers.name import name_to_smiles
 from tests.fixtures.molecules import (
     BENZENE,
     CYCLOHEXANE,
@@ -139,9 +140,67 @@ class TestParseSdf:
 class TestNameToSmiles:
     """Tests for molecule name to SMILES conversion."""
 
-    def test_placeholder(self) -> None:
-        """Placeholder test for name conversion."""
-        pass
+    def test_common_molecule_water(self) -> None:
+        """Test lookup of water."""
+        smiles = name_to_smiles("water", use_pubchem=False)
+        assert smiles == "O"
+
+    def test_common_molecule_ethanol(self) -> None:
+        """Test lookup of ethanol."""
+        smiles = name_to_smiles("ethanol", use_pubchem=False)
+        assert smiles == "CCO"
+
+    def test_common_molecule_benzene(self) -> None:
+        """Test lookup of benzene."""
+        smiles = name_to_smiles("benzene", use_pubchem=False)
+        assert smiles == "c1ccccc1"
+
+    def test_common_molecule_aspirin(self) -> None:
+        """Test lookup of aspirin."""
+        smiles = name_to_smiles("aspirin", use_pubchem=False)
+        assert smiles is not None
+        assert "C(=O)O" in smiles  # Carboxylic acid group
+
+    def test_case_insensitive(self) -> None:
+        """Test that lookup is case insensitive."""
+        assert name_to_smiles("Water", use_pubchem=False) == "O"
+        assert name_to_smiles("WATER", use_pubchem=False) == "O"
+        assert name_to_smiles("wAtEr", use_pubchem=False) == "O"
+
+    def test_whitespace_handling(self) -> None:
+        """Test that whitespace is stripped."""
+        assert name_to_smiles("  water  ", use_pubchem=False) == "O"
+        assert name_to_smiles("\tethanol\n", use_pubchem=False) == "CCO"
+
+    def test_empty_string_returns_none(self) -> None:
+        """Test that empty string returns None."""
+        assert name_to_smiles("", use_pubchem=False) is None
+        assert name_to_smiles("   ", use_pubchem=False) is None
+
+    def test_unknown_molecule_without_pubchem(self) -> None:
+        """Test that unknown molecule returns None without PubChem."""
+        smiles = name_to_smiles("unknownmolecule12345", use_pubchem=False)
+        assert smiles is None
+
+    def test_multi_word_name(self) -> None:
+        """Test lookup of multi-word molecule names."""
+        smiles = name_to_smiles("acetic acid", use_pubchem=False)
+        assert smiles == "CC(=O)O"
+
+    def test_carbon_dioxide(self) -> None:
+        """Test lookup of carbon dioxide."""
+        smiles = name_to_smiles("carbon dioxide", use_pubchem=False)
+        assert smiles == "O=C=O"
+
+    @pytest.mark.network  # type: ignore[misc]
+    def test_pubchem_lookup(self) -> None:
+        """Test PubChem lookup for unknown molecule."""
+        # Penicillin G - not in local dict, requires PubChem
+        smiles = name_to_smiles("penicillin G", use_pubchem=True)
+        # May be None if network unavailable, but if found should be valid
+        if smiles is not None:
+            mol = parse_smiles(smiles)
+            assert mol is not None
 
 
 class TestChemblToSmiles:

@@ -28,8 +28,11 @@ list instead of Typing.List).
 
 ## Development
 
+The following prompts were used and iteration was carried out until precommit hooks passed.
+
 **Parsers**
 1. Generate molecule.py parsers and unit tests based on stub
+2. Generate name.py parser and unit tests based on stub
 
 ## Claude Integration Example
 
