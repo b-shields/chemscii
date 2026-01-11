@@ -1,3 +1,5 @@
+[![CI](https://github.com/b-shields/chemscii/actions/workflows/ci.yml/badge.svg)](https://github.com/b-shields/chemscii/actions/workflows/ci.yml)
+
 # chemscii
 
 A Python package for rendering chemical structures as ASCII/Unicode art, optimized for display in LLM terminal interfaces and text-based environments.

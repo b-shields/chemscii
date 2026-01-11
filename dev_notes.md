@@ -23,7 +23,8 @@ This project was developed in part as a test exercise for using Claude code. In 
 - Add GitHub Actions test status to README.md
 9. Commit initial structure to main
 - I did this myself
-- It required a lot of patching to get the pre-commit hooks to pass
+- It required a lot of patching to get the pre-commit hooks to pass. Example "Only use modern python type hints. Modules should use built in types instead of Types (e.g.,
+list instead of Typing.List).
 
 ## Development
 
