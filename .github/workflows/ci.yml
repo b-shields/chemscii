@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install black ruff mypy
+
+      - name: Check formatting with black
+        run: black --check src tests
+
+      - name: Lint with ruff
+        run: ruff check src tests
+
+      - name: Type check with mypy
+        run: mypy src --ignore-missing-imports
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          python-version: ${{ matrix.python-version }}
+          channels: conda-forge,defaults
+
+      - name: Install dependencies
+        shell: bash -el {0}
+        run: |
+          pip install poetry
+          poetry install --no-interaction
+
+      - name: Run tests with pytest
+        shell: bash -el {0}
+        run: poetry run pytest -v

@@ -1,0 +1,47 @@
+[tool.poetry]
+name = "chemscii"
+version = "0.1.0"
+description = "Render chemical structures as ASCII/Unicode art"
+authors = ["Benjamin J. Shields"]
+readme = "README.md"
+packages = [{include = "chemscii", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+rdkit = "^2025.0"
+pillow = "^10.0"
+rich = "^13.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+black = "^24.0"
+ruff = "^0.8"
+mypy = "^1.0"
+pre-commit = "^4.0"
+
+[tool.poetry.scripts]
+chemscii = "chemscii.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

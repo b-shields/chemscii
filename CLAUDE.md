@@ -1,28 +1,16 @@
-# Development Guidelines
+# chemscii development
 
-Do not deviate from these guidelines.
+## general guidelines
 
-## Core Development Rules
+YOU MUST follow Python best practices and modern development standards. It is IMPORTANT to NOT DEVIATE from these principles:
+1. YOU MUST use conda for virtual environment management
+2. YOU MUST use poetry for python dependency management
+3. YOU MUST write unit tests for all modules
+4. YOU MUST use CI/CD (GitHub Actions) with pytest (unit testing), black (formatting), ruff (linting), and mypy (type checking).
+5. YOU MUST use type hints for all code
+6. YOU MUST otherwise follow google code and docstring conventions
+7. YOU MUST write code that is minimal, simple, reusable, and easy to understand
 
-1. Use poetry for dependency management
-2. Use pytest for unit testing
-3. Use pydantic for type checking
-4. Type hints required for all code
-5. Otherwise follow all google code and docstring conventions
-6. Write code that is minimal, simple, reusable, and easy to understand
-7. Test code frequently using unit tests with realistic inputs and validate outputs
+## project scope
 
-## System Architecture
-
-[fill in here]
-
-## Core Components
-
-
-## Pull Requests
-
-- Create a detailed by consise message of what changed. Focus on the high level description of
-  the problem it tries to solve and how it is solved.
-
-- NEVER ever mention a `co-authored-by` or similar aspects. In particular, never
-  mention the tool used to create the commit message or PR.
+YOU MUST focus entirely on building a python package for rendering chemical structures as ASCII/Unicode art, optimized for text-based environments.
