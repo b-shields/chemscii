@@ -28,6 +28,9 @@ list instead of Typing.List).
 
 ## Development
 
+**Parsers**
+1. Generate molecule.py parsers and unit tests based on stub
+
 ## Claude Integration Example
 
 ## Write Blog Post
