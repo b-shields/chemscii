@@ -11,54 +11,15 @@ Core Objectives:
 
 ## Installation
 
+Install via pip.
 ```bash
 pip install chemscii
 ```
 
-## Development
-
-Build environment.
+Development installation.
 ```bash
 conda env create -f environment.yml
 conda activate chemscii
-```
-
-Install `chemscii`.
-```bash
 poetry install
 pre-commit install
-```
-
-## Package Structure
-
-```bash
-chemscii/
-├── src/
-│   └── chemscii/
-│       ├── __init__.py
-│       ├── parsers/         # Input format parsers
-│       │   ├── __init__.py
-│       │   ├── molecule.py  # SMILES and SDF formats
-│       │   ├── name.py      # Molecule name to SMILES
-│       │   └── chembl.py    # ChEMBL ID to SMILES
-│       ├── layout/          # 2D coordinate generation
-│       │   ├── __init__.py
-│       │   ├── atoms.py     # Atoms
-│       │   └── bonds.py     # Bonds
-│       ├── renderers/       # Text rendering engines
-│       │   ├── __init__.py
-│       │   ├── base.py      # Base renderer
-│       │   ├── ascii.py     # Basic ASCII renderer
-│       │   ├── magic.py     # ASCII magic renderer
-│       │   └── unicode.py   # Basic Unicode renderer
-│       └── cli.py           # Command-line interface built with rich
-├── tests/
-│   ├── __init__.py
-│   ├── test_parsers.py
-│   ├── test_layout.py
-│   ├── test_renderers.py
-│   └── fixtures/            # Test molecule SMILES and SDF
-└── examples/
-    ├── basic_usage.py
-    └── claude_integration.py
 ```
