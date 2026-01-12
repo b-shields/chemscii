@@ -33,6 +33,13 @@ The following prompts were used and iteration was carried out until precommit ho
 **Parsers**
 1. Generate molecule.py parsers and unit tests based on stub
 2. Generate name.py parser and unit tests based on stub
+3. Generate chembl.py parser and unit tests based on stub
+4. Generate atoms.py and bonds.py layouts based on stub
+- Generated unit tests even though I didn't ask. Likely based on history and CLAUDE.md.
+5.
+
+***Observations:***
+- In general it seems to work pretty well to generate code stubs --> edit to satisfaction --> generate code based on stubs --> edit to satisfaction.
 
 ## Claude Integration Example
 
