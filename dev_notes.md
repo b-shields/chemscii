@@ -42,6 +42,9 @@ The following prompts were used and iteration was carried out until precommit ho
 - Did this myself
 8. Fromat and add doc strings to magic.py. Stay consistent with other modules and following general guidelines.
 9. Update basic_usage.ipynb to also include AsciiMagicRenderer
+10. Generate unit tests for the magic.py
+11. Geneate a rich CLI for rendering molecules with chemscii. The CLI should automatically identify and parse SMILES, files, names, and ChEMBL IDs.
+- Scilened rdkit warnings myself
 
 ***Observations:***
 - In general it seems to work pretty well to generate code stubs --> edit to satisfaction --> generate code based on stubs --> edit to satisfaction.

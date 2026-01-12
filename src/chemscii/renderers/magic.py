@@ -6,7 +6,7 @@ import io
 
 from ascii_magic import AsciiArt
 from PIL import Image
-from rdkit.Chem import Mol
+from rdkit.Chem import Kekulize, Mol, rdDepictor
 from rdkit.Chem.Draw import rdMolDraw2D
 
 
@@ -51,6 +51,12 @@ class AsciiMagicRenderer:
         Returns:
             PIL Image of the rendered molecule.
         """
+        # Standardize molecule
+        Kekulize(mol)
+        rdDepictor.SetPreferCoordGen(True)
+        rdDepictor.Compute2DCoords(mol, useRingTemplates=True)
+
+        # Geneate image
         drawer = rdMolDraw2D.MolDraw2DCairo(*mol_size)
         rdMolDraw2D.SetDarkMode(drawer)
         drawer.drawOptions().padding = 0.0

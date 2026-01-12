@@ -47,8 +47,10 @@ chemscii/
 │       │   └── bonds.py     # Bonds
 │       ├── renderers/       # Text rendering engines
 │       │   ├── __init__.py
+│       │   ├── base.py      # Base renderer
 │       │   ├── ascii.py     # Basic ASCII renderer
-│       │   └── unicode.py   # Enhanced Unicode renderer
+│       │   ├── magic.py     # ASCII magic renderer
+│       │   └── unicode.py   # Basic Unicode renderer
 │       └── cli.py           # Command-line interface built with rich
 ├── tests/
 │   ├── __init__.py

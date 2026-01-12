@@ -12,6 +12,7 @@ rdkit = "^2025.0"
 pillow = "^10.0"
 rich = "^13.0"
 ascii-magic = "^2.7.2"
+typer = "^0.15"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0"
@@ -21,7 +22,7 @@ mypy = "^1.0"
 pre-commit = "^4.0"
 
 [tool.poetry.scripts]
-chemscii = "chemscii.cli:main"
+chemscii = "chemscii.cli:app"
 
 [build-system]
 requires = ["poetry-core"]
