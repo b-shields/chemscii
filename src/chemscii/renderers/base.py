@@ -49,8 +49,9 @@ class BaseRenderer(ABC):
         bond_layout = BondLayout(mol, atom_positions)
         bond_lines = bond_layout.compute_bond_lines()
         atom_symbols = atom_layout.get_symbols()
-
-        return self.render(atom_positions, bond_lines, atom_symbols)
+        txt = self.render(atom_positions, bond_lines, atom_symbols)
+        print(txt)
+        return txt
 
     def render(
         self,
@@ -72,9 +73,9 @@ class BaseRenderer(ABC):
             return ""
 
         if self._auto_width:
-            self.width = 25
+            self.width = max(len(atom_positions) * 4, 10)
         if self._auto_height:
-            self.height = 25
+            self.height = max(len(atom_positions) * 4, 10)
 
         # Create canvas
         canvas = [[" " for _ in range(self.width)] for _ in range(self.height)]

@@ -38,6 +38,10 @@ The following prompts were used and iteration was carried out until precommit ho
 - Generated unit tests even though I didn't ask. Likely based on history and CLAUDE.md.
 5. Generate ascii.py renderer and unit tests based on stub
 6. Generate unicode.py renderer and unit tests based on stub and to match ascii.py patterns
+7. Added a new magic.py renderer that uses the ascii-magic package and a png from rdkit
+- Did this myself
+8. Fromat and add doc strings to magic.py. Stay consistent with other modules and following general guidelines.
+9. Update basic_usage.ipynb to also include AsciiMagicRenderer
 
 ***Observations:***
 - In general it seems to work pretty well to generate code stubs --> edit to satisfaction --> generate code based on stubs --> edit to satisfaction.

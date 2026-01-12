@@ -11,6 +11,7 @@ python = "^3.9"
 rdkit = "^2025.0"
 pillow = "^10.0"
 rich = "^13.0"
+ascii-magic = "^2.7.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0"
