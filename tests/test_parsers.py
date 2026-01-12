@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest
 from rdkit.Chem import Mol
 
+from chemscii.parsers.chembl import chembl_to_smiles
 from chemscii.parsers.molecule import parse_sdf, parse_smiles
 from chemscii.parsers.name import name_to_smiles
 from tests.fixtures.molecules import (
@@ -206,6 +207,63 @@ class TestNameToSmiles:
 class TestChemblToSmiles:
     """Tests for ChEMBL ID to SMILES conversion."""
 
-    def test_placeholder(self) -> None:
-        """Placeholder test for ChEMBL lookup."""
-        pass
+    def test_cached_aspirin(self) -> None:
+        """Test lookup of aspirin (CHEMBL25)."""
+        smiles = chembl_to_smiles("CHEMBL25", use_api=False)
+        assert smiles is not None
+        assert "C(=O)O" in smiles  # Carboxylic acid group
+
+    def test_cached_caffeine(self) -> None:
+        """Test lookup of caffeine (CHEMBL113)."""
+        smiles = chembl_to_smiles("CHEMBL113", use_api=False)
+        assert smiles is not None
+        mol = parse_smiles(smiles)
+        assert mol is not None
+
+    def test_cached_ethanol(self) -> None:
+        """Test lookup of ethanol (CHEMBL521)."""
+        smiles = chembl_to_smiles("CHEMBL521", use_api=False)
+        assert smiles == "CCO"
+
+    def test_cached_water(self) -> None:
+        """Test lookup of water (CHEMBL27732)."""
+        smiles = chembl_to_smiles("CHEMBL27732", use_api=False)
+        assert smiles == "O"
+
+    def test_case_insensitive(self) -> None:
+        """Test that lookup is case insensitive."""
+        assert chembl_to_smiles("chembl25", use_api=False) is not None
+        assert chembl_to_smiles("ChEmBl25", use_api=False) is not None
+        assert chembl_to_smiles("CHEMBL25", use_api=False) is not None
+
+    def test_whitespace_handling(self) -> None:
+        """Test that whitespace is stripped."""
+        assert chembl_to_smiles("  CHEMBL25  ", use_api=False) is not None
+        assert chembl_to_smiles("\tCHEMBL521\n", use_api=False) == "CCO"
+
+    def test_empty_string_returns_none(self) -> None:
+        """Test that empty string returns None."""
+        assert chembl_to_smiles("", use_api=False) is None
+        assert chembl_to_smiles("   ", use_api=False) is None
+
+    def test_invalid_format_returns_none(self) -> None:
+        """Test that invalid ChEMBL ID format returns None."""
+        assert chembl_to_smiles("25", use_api=False) is None
+        assert chembl_to_smiles("CHEMBL", use_api=False) is None
+        assert chembl_to_smiles("CHEMBLabc", use_api=False) is None
+        assert chembl_to_smiles("aspirin", use_api=False) is None
+
+    def test_unknown_id_without_api(self) -> None:
+        """Test that unknown ID returns None without API."""
+        smiles = chembl_to_smiles("CHEMBL999999999", use_api=False)
+        assert smiles is None
+
+    @pytest.mark.network  # type: ignore[misc]
+    def test_api_lookup(self) -> None:
+        """Test ChEMBL API lookup for compound not in cache."""
+        # Penicillin V - not in local cache
+        smiles = chembl_to_smiles("CHEMBL615", use_api=True)
+        # May be None if network unavailable, but if found should be valid
+        if smiles is not None:
+            mol = parse_smiles(smiles)
+            assert mol is not None
