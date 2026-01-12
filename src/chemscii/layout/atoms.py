@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from rdkit.Chem import Kekulize, Mol, rdDepictor
+from rdkit.Chem import Mol, rdDepictor
 
 
 class AtomLayout:
@@ -24,7 +24,7 @@ class AtomLayout:
         Returns:
             List of (x, y) coordinate tuples for each atom.
         """
-        Kekulize(self.molecule)
+        # Kekulize(self.molecule)
         rdDepictor.Compute2DCoords(self.molecule, useRingTemplates=True)
         conformer = self.molecule.GetConformer()
         self.positions = []
