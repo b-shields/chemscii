@@ -72,9 +72,9 @@ class BaseRenderer(ABC):
             return ""
 
         if self._auto_width:
-            self.width = len(atom_symbols) + 10
+            self.width = 25
         if self._auto_height:
-            self.height = len(atom_symbols) + 10
+            self.height = 25
 
         # Create canvas
         canvas = [[" " for _ in range(self.width)] for _ in range(self.height)]

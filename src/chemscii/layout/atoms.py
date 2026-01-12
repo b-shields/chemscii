@@ -16,6 +16,7 @@ class AtomLayout:
         """
         self.molecule = molecule
         Kekulize(self.molecule)
+        rdDepictor.SetPreferCoordGen(True)
         rdDepictor.Compute2DCoords(self.molecule, useRingTemplates=True)
         self.positions: list[tuple[float, float]] = []
         self._symbols: list[str] = []
