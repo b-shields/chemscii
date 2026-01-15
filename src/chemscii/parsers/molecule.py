@@ -15,6 +15,8 @@ def parse_smiles(smiles: str) -> Mol | None:
     Returns:
         An RDKit Mol object, or None if parsing fails.
     """
+    if not smiles:
+        return None
     mol = Chem.MolFromSmiles(smiles)
     if mol is not None:
         rdDepictor.Compute2DCoords(mol)
@@ -30,7 +32,7 @@ def parse_sdf(sdf_content: str) -> Mol | None:
     Returns:
         An RDKit Mol object, or None if parsing fails.
     """
-    mol = Chem.MolFromMolBlock(sdf_content)
-    if mol is not None:
-        rdDepictor.Compute2DCoords(mol)
+    if not sdf_content:
+        return None
+    mol = Chem.MolFromMolBlock(sdf_content, removeHs=False)
     return mol
