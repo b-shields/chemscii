@@ -28,54 +28,31 @@ pre-commit install
 
 ### Pyridine (SMILES: c1ncccc1)
 ```
-$ chemscii c1ncccc1 --columns 100
+$ chemscii c1ncccc1
 ```
 ```
-                                              "!3gVjJgVTr;
-                                          ^rTqqJ*+.  -\13gFoi'
-                                      ;cLmgf?|.          _)eFg5t>-
-                                  '%zph3[\`        ,I)`      :%j6gy])`
-                              _)eFh5a>_            +uqgwI/.      ;lnqgwI/
-                          `\13gp7v'                   ={JSS#{=       +{JSq#{=
-                      .|!fgmLc,                          ./Iwgmul;      ."?wgmul;
-                   +}CSqTs^                                  `)[3g6z%:      `)[3gpz%'
-               ^sTqSC}+                                          _>a5gFe)_      _>a5hFe)_
-           ,cLmgf!|.                                                 'v7pg31\`      'vzpg3[\`
-       `ijmg31\`                                                         ,cLmgf!".      ,cumg3?+
-       rN3i_                                                                 ^sTqSJ*+       +}OY'
-       {Rr                                                                       /}CgqT%      S&'
-       {R{    .32.                                                                  .|[r      qO_
-       {R{    .PP.                                                                            SO_
-       {R{    .gg.                                                                            SO_
-       {R{    .gg.                                                                            Sk_
-       {R{    .gg.                                                                            Sk_
-       {R{    .gg.                                                                            Sk_
-       *R{    .Xg.                                                                            Sk_
-       sDr    .Xg.                                                                            gk_
-       )T|    .4V.                                                                            gk_
-       |j"     t1                                                                             gY_
-       |L"     !!                                                                             gY_
-       |L"     ]!                                                                             gY_
-       |L"     ]!                                                                             gY_
-       |L"    .]!                                                                             gY-
-       |L"    .]!                                                                             gY-
-       |L"    .]!                                                                             gY-
-       )u"    .[!                                                                             hY-
-       /1=     *s                                                                             hY-
-    `\/   _).                                                                       .|]x      hb-
-    ,o?c` =o_                                                                    +*CSq#%      VO_
-    ,t,)?;;e_                                                                ^rTqSC}+       =*&b_
-    ,e, +Ile_`;.                                                         ,xLmgf!|.      ,xLmh2!/
-    'I'  _s!-^*Ir\,                                                  'v7pg31\`      'v7pg21\`
-               _/%}}c)'                                          _>a5gFe)_      _>a5gFe)_
-                   '|c}}x"_                                  `\[3gpz%'      `)[3gpz%:
-                       ,\lI*%/-                          ."?fgmLc,      ."?wgmul;
-                          .;<rI{x)'                   +*JSqTs^       +*JSq#{=
-                              `^{5h5a>_            |TqSC}/       ^rnqgC}/
-                                  :%z6g3[)`        ^I|.      ,xjmgy!|.
-                                      ;lumgwI/.          'voph21<-
-                                          ={TqqT{=   _<t2g5e)_
-                                             .|]5EqzwXhnc,
+                    _\{t1xc11r|-
+                _|l!!l|_ .|''|l!?x+`
+            -"l!]r)_     `%?]r|''|r]?%+`
+        `/c!]s)'            `+x?!r|':)s]?%=.
+    ./x!]{\'                    `/c!!l"':\{]Iv^
+   +y*\_                            -"l!!c/_;)!w_
+   )F  iv                               _|rl  .h,
+   )5  oo                                     `q,
+   )5  aa                                     `q,
+   )5  ee                                     `q,
+   /[  !!                                     -q,
+   ^r  >>                                     -q,
+   ^s  )>                                     -q,
+   ^s  )>                                     -q:
+   ;r  ><                                     -q:
+  /)_+```                               _|rl  .h,
+  %\)s:`                            -"l!!c/_;)!f_
+  +`-<')\";`                    -/c!!l"':\{]Iv^
+        .'/\\",`            `/x!!l|':)s]?%=.
+            .:/\rr|_     -%?]r|'')r]?x+`
+                _|l!!l"- .|''|l!?x+`
+                    '\*t1%l11r"-
 ```
 
 ### Colchicine (by name)
