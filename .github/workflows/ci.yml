@@ -19,6 +19,8 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install poetry
+          poetry install --no-interaction
           pip install black ruff mypy
 
       - name: Check formatting with black
