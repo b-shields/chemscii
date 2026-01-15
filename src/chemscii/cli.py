@@ -107,7 +107,7 @@ def version_callback(value: bool) -> None:
         raise typer.Exit()
 
 
-@app.command()  # type: ignore[misc, unused-ignore]
+@app.command()
 def main(
     molecule: str = typer.Argument(
         ...,
