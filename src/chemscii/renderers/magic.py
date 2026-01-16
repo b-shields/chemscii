@@ -17,13 +17,15 @@ class AsciiMagicRenderer:
     the image to ASCII art using the ascii_magic library.
     """
 
-    def __init__(self, columns: int = 120) -> None:
+    def __init__(self, columns: int = 120, codes: bool = True) -> None:
         """Initialize the renderer.
 
         Args:
             columns: Width of the ASCII art output in characters.
+            codes: Include escape codes.
         """
         self.columns = columns
+        self.codes = codes
 
     def render_molecule(self, mol: Mol) -> str:
         """Render a molecule as ASCII art.
@@ -36,7 +38,11 @@ class AsciiMagicRenderer:
         """
         img = self._mol_to_image(mol)
         art = AsciiArt.from_pillow_image(img)
-        txt: str = art.to_terminal(self.columns)
+        if self.codes:
+            txt: str = art.to_ascii(self.columns)
+            print(repr(txt))
+        else:
+            txt = art.to_terminal(self.columns)
         return txt
 
     def _mol_to_image(
