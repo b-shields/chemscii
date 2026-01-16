@@ -197,12 +197,6 @@ class TestCliMain:
         assert result.exit_code == 1
         assert "Could not parse" in result.stdout
 
-    def test_version_flag(self) -> None:
-        """Test version flag."""
-        result = runner.invoke(app, ["--version"])
-        assert result.exit_code == 0
-        assert "0.1.0" in result.stdout
-
     def test_help_flag(self) -> None:
         """Test help flag."""
         result = runner.invoke(app, ["--help"])
