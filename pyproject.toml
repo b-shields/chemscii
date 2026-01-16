@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chemscii"
-version = "0.1.0"
+version = "0.1.1"
 description = "Render chemical structures as ASCII/Unicode art"
 authors = ["Benjamin J. Shields"]
 readme = "README.md"
