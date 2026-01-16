@@ -100,13 +100,6 @@ def parse_input(input_type: InputType, value: str) -> str | None:
     return None
 
 
-def version_callback(value: bool) -> None:
-    """Print version and exit."""
-    if value:
-        console.print("chemscii 0.1.0")
-        raise typer.Exit()
-
-
 @app.command()
 def main(
     molecule: str = typer.Argument(
@@ -137,6 +130,12 @@ def main(
         "-c",
         help="Output width for magic renderer.",
     ),
+    escape_codes: bool = typer.Option(
+        False,
+        "--codes",
+        "-e",
+        help="Include escape codes for color rendering after copying text.",
+    ),
     width: int = typer.Option(
         60,
         "--width",
@@ -148,14 +147,6 @@ def main(
         "--height",
         "-H",
         help="Canvas height for ascii/unicode renderers.",
-    ),
-    version: bool = typer.Option(
-        False,
-        "--version",
-        "-v",
-        callback=version_callback,
-        is_eager=True,
-        help="Show version and exit.",
     ),
 ) -> None:
     """Render a chemical structure as ASCII/Unicode art.
@@ -221,7 +212,7 @@ def main(
         unicode_renderer.render_molecule(mol)
     else:
         # Default to magic
-        magic_renderer = AsciiMagicRenderer(columns=columns)
+        magic_renderer = AsciiMagicRenderer(columns=columns, codes=escape_codes)
         magic_renderer.render_molecule(mol)
 
 

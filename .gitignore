@@ -143,6 +143,11 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
+# claude
+.claude
+*/.claude
+*/*/.claude
+
 # Pyre type checker
 .pyre/
 

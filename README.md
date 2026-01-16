@@ -24,8 +24,12 @@ pre-commit install
 
 ## Examples
 
-### Colchicine (by name)
+### Render Colchicine (by name)
 ```bash
 $ chemscii colchicine --columns 100
 ```
 ![colchicine.png](examples/images/colchicine.png)
+
+
+### Use chemscii as a Claude code tool
+![claude_code_example.png](examples/images/claude_code_example.png)
