@@ -85,10 +85,12 @@ def _render(
             r = UnicodeRenderer(width=width, height=height)
         else:
             r = AsciiMagicRenderer(columns=columns, codes=escape_codes)
-        result = r.render_molecule(mol)
+        r.render_molecule(mol)
+        result: str = repr(sys.stdout.getvalue())
 
         return result
     finally:
+        sys.stdout.close()
         sys.stdout = old_stdout
 
 
