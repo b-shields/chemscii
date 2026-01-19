@@ -72,53 +72,36 @@ class TestRender:
 
     def test_render_ascii(self) -> None:
         """Test ASCII renderer."""
-        result = _render(
-            "CCO", "ascii", width=40, height=20, columns=50, escape_codes=False
-        )
+        result = _render("CCO", "ascii", width=40, height=20, columns=50)
         assert isinstance(result, str)
         assert len(result) > 0
 
     def test_render_unicode(self) -> None:
         """Test Unicode renderer."""
-        result = _render(
-            "CCO", "unicode", width=40, height=20, columns=50, escape_codes=False
-        )
+        result = _render("CCO", "unicode", width=40, height=20, columns=50)
         assert isinstance(result, str)
         assert len(result) > 0
 
     def test_render_magic(self) -> None:
         """Test Magic renderer."""
-        result = _render(
-            "CCO", "magic", width=40, height=20, columns=50, escape_codes=False
-        )
+        result = _render("CCO", "magic", width=40, height=20, columns=50)
         assert isinstance(result, str)
         assert len(result) > 0
 
     def test_render_invalid_smiles_raises(self) -> None:
         """Test that invalid SMILES raises ValueError."""
         with pytest.raises(ValueError, match="Failed to parse SMILES"):
-            _render(
-                "invalid_smiles_xyz",
-                "ascii",
-                width=40,
-                height=20,
-                columns=50,
-                escape_codes=False,
-            )
+            _render("invalid_smiles_xyz", "ascii", width=40, height=20, columns=50)
 
     def test_render_benzene_ascii(self) -> None:
         """Test rendering benzene with ASCII."""
-        result = _render(
-            "c1ccccc1", "ascii", width=40, height=20, columns=50, escape_codes=False
-        )
+        result = _render("c1ccccc1", "ascii", width=40, height=20, columns=50)
         assert isinstance(result, str)
         assert len(result) > 0
 
     def test_render_custom_dimensions(self) -> None:
         """Test rendering with custom dimensions."""
-        result = _render(
-            "CCO", "unicode", width=80, height=40, columns=100, escape_codes=False
-        )
+        result = _render("CCO", "unicode", width=80, height=40, columns=100)
         assert isinstance(result, str)
 
 
