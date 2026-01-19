@@ -39,10 +39,10 @@ class AsciiMagicRenderer:
         img = self._mol_to_image(mol)
         art = AsciiArt.from_pillow_image(img)
         if self.codes:
-            txt: str = art.to_ascii(self.columns)
-            print(repr(txt))
+            txt: str = art.to_terminal(self.columns)
         else:
-            txt = art.to_terminal(self.columns)
+            txt = art.to_ascii(self.columns)
+            print(repr(txt))
         return txt
 
     def _mol_to_image(

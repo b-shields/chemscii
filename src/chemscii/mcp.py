@@ -54,7 +54,6 @@ def _render(
     width: int,
     height: int,
     columns: int,
-    escape_codes: bool,
 ) -> str:
     """Render a molecule using the specified renderer.
 
@@ -64,7 +63,6 @@ def _render(
         width: Canvas width for ascii/unicode renderers.
         height: Canvas height for ascii/unicode renderers.
         columns: Output width for magic renderer.
-        escape_codes: Include escape codes for color rendering.
 
     Returns:
         ASCII/Unicode art representation of the molecule.
@@ -84,9 +82,9 @@ def _render(
         elif renderer == "unicode":
             r = UnicodeRenderer(width=width, height=height)
         else:
-            r = AsciiMagicRenderer(columns=columns, codes=escape_codes)
-        r.render_molecule(mol)
-        result: str = repr(sys.stdout.getvalue())
+            r = AsciiMagicRenderer(columns=columns, codes=True)
+        result: str = r.render_molecule(mol)
+        # result: str = repr(sys.stdout.getvalue())
 
         return result
     finally:
@@ -101,7 +99,6 @@ def render_molecule(
     width: int = 60,
     height: int = 30,
     columns: int = 80,
-    escape_codes: bool = False,
 ) -> str:
     """Render a chemical structure as ASCII/Unicode art.
 
@@ -111,7 +108,6 @@ def render_molecule(
         width: Canvas width for ascii/unicode renderers.
         height: Canvas height for ascii/unicode renderers.
         columns: Output width for magic renderer.
-        escape_codes: Include escape codes for color rendering.
 
     Returns:
         ASCII/Unicode art representation of the molecule.
@@ -121,7 +117,7 @@ def render_molecule(
         return f"Error: Could not parse molecule input: {molecule}"
 
     try:
-        return _render(smiles, renderer, width, height, columns, escape_codes)
+        return _render(smiles, renderer, width, height, columns)
     except Exception as e:
         return f"Error rendering molecule: {e}"
 
@@ -131,7 +127,6 @@ def run_server(
     width: int = 60,
     height: int = 30,
     columns: int = 80,
-    escape_codes: bool = False,
 ) -> None:
     """Run the MCP server with optional default settings.
 
@@ -144,6 +139,6 @@ def run_server(
     """
     # Store defaults that could be used by the tool
     # For now, the tool uses its own defaults but this allows future extension
-    _ = (renderer, width, height, columns, escape_codes)
+    _ = (renderer, width, height, columns)
 
     mcp.run()

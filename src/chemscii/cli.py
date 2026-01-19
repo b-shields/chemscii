@@ -135,12 +135,6 @@ def main(
         "-c",
         help="Output width for magic renderer.",
     ),
-    escape_codes: bool = typer.Option(
-        False,
-        "--codes",
-        "-e",
-        help="Include escape codes for color rendering after copying text.",
-    ),
     width: int = typer.Option(
         60,
         "--width",
@@ -179,7 +173,6 @@ def main(
             width=width,
             height=height,
             columns=columns,
-            escape_codes=escape_codes,
         )
         return
 
@@ -254,7 +247,7 @@ def main(
         unicode_renderer.render_molecule(mol)
     else:
         # Default to magic
-        magic_renderer = AsciiMagicRenderer(columns=columns, codes=escape_codes)
+        magic_renderer = AsciiMagicRenderer(columns=columns)
         magic_renderer.render_molecule(mol)
 
 
