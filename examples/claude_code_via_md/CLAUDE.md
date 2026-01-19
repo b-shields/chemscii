@@ -1,4 +1,4 @@
-# chemscii Claude Code Integration
+# chemscii Claude Code Integration Via CLAUDE.md
 
 When users ask about chemical structures, molecules, drugs, or compounds, render them using the `chemscii` CLI.
 If your response to a question includes SMILES, molecules, or ChEMBL IDs render them using the `chemscii` CLI.
@@ -8,14 +8,14 @@ If your response to a question includes SMILES, molecules, or ChEMBL IDs render 
 Use the magic renderer (default) with 100 columns:
 
 ```bash
-chemscii "<molecule>" --columns 80
+chemscii "<molecule>"
 ```
 
 Examples:
-- `chemscii "caffeine" --columns 80` - render by common name
-- `chemscii "aspirin" --columns 80` - render by drug name
-- `chemscii "CCO" --columns 80` - render by SMILES notation
-- `chemscii "CHEMBL25" --columns 80` - render by ChEMBL ID
+- `chemscii "caffeine"` - render by common name
+- `chemscii "aspirin"` - render by drug name
+- `chemscii "CCO"` - render by SMILES notation
+- `chemscii "CHEMBL25"` - render by ChEMBL ID
 
 ## Larger Renderings
 

@@ -102,9 +102,14 @@ def parse_input(input_type: InputType, value: str) -> str | None:
 
 @app.command()
 def main(
-    molecule: str = typer.Argument(
-        ...,
+    molecule: str | None = typer.Argument(
+        None,
         help="SMILES string, molecule name, ChEMBL ID, or file path.",
+    ),
+    mcp_mode: bool = typer.Option(
+        False,
+        "--mcp",
+        help="Start MCP server instead of rendering a molecule.",
     ),
     ascii_mode: bool = typer.Option(
         False,
@@ -125,16 +130,10 @@ def main(
         help="Use image-to-ASCII magic renderer (default).",
     ),
     columns: int = typer.Option(
-        50,
+        80,
         "--columns",
         "-c",
         help="Output width for magic renderer.",
-    ),
-    escape_codes: bool = typer.Option(
-        False,
-        "--codes",
-        "-e",
-        help="Include escape codes for color rendering after copying text.",
     ),
     width: int = typer.Option(
         60,
@@ -153,7 +152,43 @@ def main(
 
     Automatically detects input type: SMILES strings, molecule names,
     ChEMBL IDs, or structure files (.sdf, .mol, .smi).
+
+    Use --mcp to start an MCP server for AI assistant integration.
     """
+    # Handle MCP mode
+    if mcp_mode:
+        from chemscii.mcp import run_server
+
+        # Determine default renderer from CLI flags
+        renderer: Literal["ascii", "unicode", "magic"]
+        if ascii_mode:
+            renderer = "ascii"
+        elif unicode_mode:
+            renderer = "unicode"
+        else:
+            renderer = "magic"
+
+        run_server(
+            renderer=renderer,
+            width=width,
+            height=height,
+            columns=columns,
+        )
+        return
+
+    # Require molecule argument when not in MCP mode
+    if molecule is None:
+        error_console.print(
+            Panel(
+                "[red]Missing required argument: molecule[/red]\n\n"
+                "Usage: chemscii [MOLECULE]\n\n"
+                "Use --mcp to start the MCP server instead.",
+                title="Error",
+                border_style="red",
+            )
+        )
+        raise typer.Exit(1)
+
     from rdkit.rdBase import BlockLogs
 
     # Detect input type
@@ -212,7 +247,7 @@ def main(
         unicode_renderer.render_molecule(mol)
     else:
         # Default to magic
-        magic_renderer = AsciiMagicRenderer(columns=columns, codes=escape_codes)
+        magic_renderer = AsciiMagicRenderer(columns=columns)
         magic_renderer.render_molecule(mol)
 
 
